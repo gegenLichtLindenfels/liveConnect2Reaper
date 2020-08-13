@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<GMA3 DataVersion="1.2.0.2">
+    <Plugin Name="Live Connect 2 Reaper" Guid="00 00 00 00 D5 3C 00 00 F8 64 32 81 22 10 38 2D" Version="0.0.0.0">
+        <ComponentLua Name="Live Connect" Guid="00 00 00 00 80 40 00 00 FE 64 32 81 A2 0E 38 2D" FileName="liveConnect.lua" />
+    </Plugin>
+</GMA3>
