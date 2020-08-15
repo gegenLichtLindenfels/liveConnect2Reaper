@@ -14,6 +14,7 @@ end;
 local socket = require("socket")
 local http = socket.http
 local ltn12 = require("ltn12")
+package.preload['mime.core'] = function() return {}; end;
 local mime = require("mime")
 
 -- Cache responses
