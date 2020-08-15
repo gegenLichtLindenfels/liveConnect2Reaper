@@ -25,9 +25,9 @@ function Main()
 
     local seqNo = TextInput("Enter sequence number", 1);
     if(not seqNo or not tonumber(seqNo)) then Error("Invalid sequence number"); return; end;
-    local seq = Root().ShowData.DataPools.Default.Sequences[id];
-    if(not seq) then Error("Sequence does not exist"); return; end;
-  
+    local seq = Root().ShowData.DataPools.Default.Sequences[tonumber(seqNo)];
+    if(not seq.no) then Error("Sequence does not exist"); return; end;
+    
     while(true) do (function()
   
       local response = http.request('http://localhost:18080/_/MARKER');
