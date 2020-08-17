@@ -32,7 +32,7 @@ function Main()
     local seq = Root().ShowData.DataPools.Default.Sequences[tonumber(seqNo)];
     if(not seq.no) then Error("Sequence does not exist"); return; end;
     
-    while(true) do (function()
+    -- while(true) do (function()
   
       local response = http.request('http://localhost:18080/_/MARKER');
       if(response == lastResponse) then return; end; -- no changes to effect 
@@ -45,9 +45,7 @@ function Main()
         end; last[i] = time;  
       end; lastResponse = response;
   
-      Sleep(0.5);
-  
-    end)() end;
+    -- end)() end;
   
   end
 
