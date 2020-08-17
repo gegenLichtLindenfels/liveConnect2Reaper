@@ -36,8 +36,8 @@ function Main()
   
       local response = http.request('http://localhost:18080/_/MARKER');
       if(response == lastResponse) then return; end; -- no changes to effect 
-   
-      for name, i, time in response:gmatch('MARKER\t([^\t]+)\t([^\t]+)\t([^\t]+)') do
+
+      for name, i, time, color in response:gmatch('MARKER\t([^\t]*)\t([^\t]+)\t([^\t]+)\t([^\t]+)\n') do
         local cueRef = "Sequence " .. seqNo .. " Cue " .. i;
         if(last[i] ~= time) then
           Printf('Assign %s /Trig="Timecode" /TrigTime=%s', cueRef, tonumber(time));
