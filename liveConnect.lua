@@ -11,11 +11,15 @@ local function Error(m)
 end;
 
 -- Load HTTP package
-local socket = require("socket")
-local http = socket.http
-local ltn12 = require("ltn12")
 package.preload['mime.core'] = function() return {}; end;
-local mime = require("mime")
+--[[
+  To make the http package work changes to the requirements/http.lua are required:
+  
+  local url = require("socket.url") -->> local url = require("url")
+  local headers = require("socket.headers") -->> local headers = require("headers")
+]]--
+local http = require("http")
+
 
 -- Cache responses
 local lastResponse;
