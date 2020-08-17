@@ -40,7 +40,7 @@ function Main()
       for name, i, time, color in response:gmatch('MARKER\t([^\t]*)\t([^\t]+)\t([^\t]+)\t([^\t]+)\n') do
         local cueRef = "Sequence " .. seqNo .. " Cue " .. i;
         if(last[i] ~= time) then
-          Printf('Assign %s /Trig="Timecode" /TrigTime=%s', cueRef, tonumber(time));
+          print("Marker %s at %s: %s", i, time, name)
           -- gma.cmd(string.format('Assign %s /Trig="Timecode" /TrigTime=%s', cueRef, tonumber(time)));
         end; last[i] = time;  
       end; lastResponse = response;
