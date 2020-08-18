@@ -46,7 +46,11 @@ function Main()
         local cueRef = "Sequence " .. seqNo .. " Cue " .. i;
         if(last[i] ~= time) then
           print("Marker %s at %s: %s", i, time, name)
-          -- gma.cmd(string.format('Assign %s /Trig="Timecode" /TrigTime=%s', cueRef, tonumber(time)));
+          if (seq.name == "Sequence "..seq.no) then
+            Cmd('Set Timecode ' .. code.no .. '.*."<Sequence ' .. seq.no .. '>".*.*.' .. i .. ' Property Time ' .. time)
+          else
+            Cmd('Set Timecode ' .. code.no .. '.*."' .. seq.name .. '".*.*.' .. i .. ' Property Time ' .. time)
+          end
         end; last[i] = time;  
       end; lastResponse = response;
   
