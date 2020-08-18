@@ -31,6 +31,11 @@ function Main()
     if(not seqNo or not tonumber(seqNo)) then Error("Invalid sequence number"); return; end;
     local seq = Root().ShowData.DataPools.Default.Sequences[tonumber(seqNo)];
     if(not seq.no) then Error("Sequence does not exist"); return; end;
+
+    local codeNo = TextInput("Enter timecode number", 1);
+    if(not codeNo or not tonumber(codeNo)) then Error("Invalid timecode number"); return; end;
+    local code = Root().ShowData.DataPools.Default.Sequences[tonumber(codeNo)];
+    if(not code.no) then Error("Timecode does not exist"); return; end;
     
     -- while(true) do (function()
   
