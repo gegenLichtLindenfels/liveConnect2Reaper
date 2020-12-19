@@ -30,10 +30,9 @@ function Main()
     local code = Root().ShowData.DataPools.Default.Sequences[tonumber(codeNo)];
     if(not code.no) then Error("Timecode does not exist"); return; end;
     
-    -- while(true) do (function()
+    while true do
   
       local response = http.request('http://localhost:18080/_/MARKER');
-      if(response == lastResponse) then return; end; -- no changes to effect 
 
       for name, i, time, color in response:gmatch('MARKER\t([^\t]*)\t([^\t]+)\t([^\t]+)\t([^\t]+)\n') do
         local cueRef = "Sequence " .. seqNo .. " Cue " .. i;
@@ -47,7 +46,8 @@ function Main()
         end; last[i] = time;  
       end; lastResponse = response;
   
-    -- end)() end;
+    coroutine.yield(3)
+    end
   
   end
 
