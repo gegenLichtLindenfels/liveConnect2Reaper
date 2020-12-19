@@ -1,4 +1,4 @@
-local print = Printf;
+local print = Printf
 local function Error(m)
   local options = {
     title = "Error",
@@ -14,40 +14,39 @@ end
 -- Load HTTP package
 local http = require("http")
 
--- Cache responses
-local lastResponse;
-local last = {};
+local lastResponse
+local last = {}
 
 function Main()
 
-  local seqNo = TextInput("Enter sequence number", 1);
+  local seqNo = TextInput("Enter sequence number", 1)
   if (not seqNo or not tonumber(seqNo)) then
-    Error("Invalid sequence number");
-    return;
+    Error("Invalid sequence number")
+    return
   end
-  local seq = Root().ShowData.DataPools.Default.Sequences[tonumber(seqNo)];
+  local seq = Root().ShowData.DataPools.Default.Sequences[tonumber(seqNo)]
   if (not seq.no) then
-    Error("Sequence does not exist");
-    return;
+    Error("Sequence does not exist")
+    return
   end
 
-  local codeNo = TextInput("Enter timecode number", 1);
+  local codeNo = TextInput("Enter timecode number", 1)
   if (not codeNo or not tonumber(codeNo)) then
-    Error("Invalid timecode number");
-    return;
+    Error("Invalid timecode number")
+    return
   end
-  local code = Root().ShowData.DataPools.Default.Sequences[tonumber(codeNo)];
+  local code = Root().ShowData.DataPools.Default.Sequences[tonumber(codeNo)]
   if (not code.no) then
-    Error("Timecode does not exist");
-    return;
+    Error("Timecode does not exist")
+    return
   end
 
   while true do
 
-    local response = http.request('http://localhost:18080/_/MARKER');
+    local response = http.request('http://localhost:18080/_/MARKER')
 
     for name, i, time, color in response:gmatch('MARKER\t([^\t]*)\t([^\t]+)\t([^\t]+)\t([^\t]+)\n') do
-      local cueRef = "Sequence " .. seqNo .. " Cue " .. i;
+      local cueRef = "Sequence " .. seqNo .. " Cue " .. i
       if (last[i] ~= time) then
         print("Marker %s at %s: %s", i, time, name)
         if (seq.name == "Sequence " .. seq.no) then
@@ -56,9 +55,9 @@ function Main()
           Cmd('Set Timecode ' .. code.no .. '.*."' .. seq.name .. '".*.*.' .. i .. ' Property Time ' .. time)
         end
       end
-      last[i] = time;
+      last[i] = time
     end
-    lastResponse = response;
+    lastResponse = response
 
     coroutine.yield(3)
   end
